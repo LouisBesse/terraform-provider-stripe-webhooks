@@ -30,7 +30,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v4
         with:
           version: v1.25.1
-          args: --config=.github/gorelease.yml release --rm-dist
+          args: --config=.github/gorelease.yml release --clean
         env:
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
           # GitHub sets this automatically
