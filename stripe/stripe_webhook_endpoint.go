@@ -27,10 +27,22 @@ func resourceStripeWebhookEndpoint() *schema.Resource {
 				Elem:        &schema.Schema{Type: schema.TypeString},
 				Description: "The list of events to enable for this endpoint. Use ['*'] to enable all events.",
 			},
+			"description": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "An optional description of what the webhook is used for.",
+			},
+			"disabled": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Disable the webhook endpoint if set to true.",
+			},
 			"connect": {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
+				ForceNew:    true,
 				Description: "Whether the endpoint receives events from connected accounts.",
 			},
 			"api_version": {
@@ -43,6 +55,18 @@ func resourceStripeWebhookEndpoint() *schema.Resource {
 				Computed:    true,
 				Sensitive:   true,
 				Description: "The endpoint’s secret, used to generate webhook signatures. Returned only upon creation.",
+			},
+			"application": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "The ID of the associated Connect application.",
+			},
+			"metadata": {
+				Type:     schema.TypeMap,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+				Description: "Set of key-value pairs that you can attach to an object. " +
+					"This can be useful for storing additional information about the object in a structured format.",
 			},
 		},
 	}
