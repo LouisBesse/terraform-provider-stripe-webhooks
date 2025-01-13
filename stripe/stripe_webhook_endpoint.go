@@ -48,6 +48,7 @@ func resourceStripeWebhookEndpoint() *schema.Resource {
 			"api_version": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				ForceNew:    true,
 				Description: "The API version to use for events sent to this endpoint.",
 			},
 			"secret": {
