@@ -5,8 +5,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/stripe/stripe-go/v81"
-	"github.com/stripe/stripe-go/v81/client"
+	"github.com/stripe/stripe-go/v82"
+	"github.com/stripe/stripe-go/v82/client"
 )
 
 func resourceStripeWebhookEndpoint() *schema.Resource {
