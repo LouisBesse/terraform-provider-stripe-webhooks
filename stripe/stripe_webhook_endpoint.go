@@ -2,11 +2,9 @@ package stripe
 
 import (
 	"context"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/stripe/stripe-go/v82"
-	"github.com/stripe/stripe-go/v82/client"
 )
 
 func resourceStripeWebhookEndpoint() *schema.Resource {
@@ -73,13 +71,13 @@ func resourceStripeWebhookEndpoint() *schema.Resource {
 	}
 }
 
-func resourceStripeWebhookEndpointRead(_ context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.API)
+func resourceStripeWebhookEndpointRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*stripe.Client)
 	var webhookEndpoint *stripe.WebhookEndpoint
 	var err error
 
 	err = retryWithBackOff(func() error {
-		webhookEndpoint, err = c.WebhookEndpoints.Get(d.Id(), nil)
+		webhookEndpoint, err = c.V1WebhookEndpoints.Retrieve(ctx, d.Id(), nil)
 		return err
 	})
 	if err != nil {
@@ -99,11 +97,11 @@ func resourceStripeWebhookEndpointRead(_ context.Context, d *schema.ResourceData
 }
 
 func resourceStripeWebhookEndpointCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.API)
+	c := m.(*stripe.Client)
 	var webhookEndpoint *stripe.WebhookEndpoint
 	var err error
 
-	params := &stripe.WebhookEndpointParams{
+	params := &stripe.WebhookEndpointCreateParams{
 		URL:           stripe.String(ExtractString(d, "url")),
 		EnabledEvents: stripe.StringSlice(ExtractStringSlice(d, "enabled_events")),
 	}
@@ -123,7 +121,7 @@ func resourceStripeWebhookEndpointCreate(ctx context.Context, d *schema.Resource
 	}
 
 	err = retryWithBackOff(func() error {
-		webhookEndpoint, err = c.WebhookEndpoints.New(params)
+		webhookEndpoint, err = c.V1WebhookEndpoints.Create(ctx, params)
 		return err
 	})
 	if err != nil {
@@ -142,10 +140,10 @@ func resourceStripeWebhookEndpointCreate(ctx context.Context, d *schema.Resource
 }
 
 func resourceStripeWebhookEndpointUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.API)
+	c := m.(*stripe.Client)
 	var err error
 
-	params := &stripe.WebhookEndpointParams{}
+	params := &stripe.WebhookEndpointUpdateParams{}
 
 	if d.HasChange("enabled_events") {
 		params.EnabledEvents = stripe.StringSlice(ExtractStringSlice(d, "enabled_events"))
@@ -165,7 +163,7 @@ func resourceStripeWebhookEndpointUpdate(ctx context.Context, d *schema.Resource
 	}
 
 	err = retryWithBackOff(func() error {
-		_, err = c.WebhookEndpoints.Update(d.Id(), params)
+		_, err = c.V1WebhookEndpoints.Update(ctx, d.Id(), params)
 		return err
 	})
 	if err != nil {
@@ -175,12 +173,12 @@ func resourceStripeWebhookEndpointUpdate(ctx context.Context, d *schema.Resource
 	return resourceStripeWebhookEndpointRead(ctx, d, m)
 }
 
-func resourceStripeWebhookEndpointDelete(_ context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.API)
+func resourceStripeWebhookEndpointDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*stripe.Client)
 	var err error
 
 	err = retryWithBackOff(func() error {
-		_, err = c.WebhookEndpoints.Del(d.Id(), nil)
+		_, err = c.V1WebhookEndpoints.Delete(ctx, d.Id(), nil)
 		return err
 	})
 	if err != nil {
