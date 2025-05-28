@@ -87,6 +87,7 @@ github.com/stripe/stripe-go/v81 v81.1.1 h1:5wpVhqvkHkZyYOpve5LOoQUw6YeDj6g2a8RLI
 github.com/stripe/stripe-go/v81 v81.1.1/go.mod h1:C/F4jlmnGNacvYtBp/LUHCvVUJEZffFQCobkzwY1WOo=
 github.com/stripe/stripe-go/v81 v81.2.0 h1:AduJoFed6xif3uG7rXRa2LxY+AJiialVA1hXDak1aUk=
 github.com/stripe/stripe-go/v81 v81.2.0/go.mod h1:C/F4jlmnGNacvYtBp/LUHCvVUJEZffFQCobkzwY1WOo=
+github.com/stripe/stripe-go/v82 v82.1.0/go.mod h1:majCQX6AfObAvJiHraPi/5udwHi4ojRvJnnxckvHrX8=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=

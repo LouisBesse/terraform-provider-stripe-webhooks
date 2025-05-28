@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.35.0
-	github.com/stripe/stripe-go/v81 v81.2.0
+	github.com/stripe/stripe-go/v82 v82.1.0
 )
 
 require (

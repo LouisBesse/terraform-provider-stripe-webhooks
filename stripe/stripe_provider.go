@@ -5,7 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/stripe/stripe-go/v81/client"
+	"github.com/stripe/stripe-go/v82"
 )
 
 func Provider() *schema.Provider {
@@ -28,5 +28,5 @@ func Provider() *schema.Provider {
 
 func providerConfigure(_ context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	key := ExtractString(d, "api_key")
-	return client.New(key, nil), nil
+	return stripe.NewClient(key, nil), nil
 }
