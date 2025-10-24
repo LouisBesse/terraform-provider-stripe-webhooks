@@ -50,3 +50,4 @@ Import is supported using the following syntax:
 
 ```shell
 $ terraform import stripe_webhook_endpoint.webhook <webhook_endpoint_id>
+```
