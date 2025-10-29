@@ -82,6 +82,10 @@ func resourceStripeWebhookEndpointRead(ctx context.Context, d *schema.ResourceDa
 		return err
 	})
 	if err != nil {
+		if stripeErr, ok := err.(*stripe.Error); ok && stripeErr.Code == "resource_missing" {
+			d.SetId("")
+			return nil
+		}
 		return diag.FromErr(err)
 	}
 
