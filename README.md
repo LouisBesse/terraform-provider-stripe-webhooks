@@ -13,7 +13,7 @@ terraform {
   required_providers {
     stripe-webhooks = {
       source = "louisbesse/stripe-webhooks"
-      version = "5.0.1"
+      version = "5.0.2"
     }
   }
 }
