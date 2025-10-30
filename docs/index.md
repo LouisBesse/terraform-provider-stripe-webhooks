@@ -11,6 +11,8 @@ The Stripe Terraform Webhooks provider uses the official Stripe SDK based on Gol
 developed
 around the official Stripe API documentation [website](https://stripe.com/docs/api).
 
+This release changes the pinned API version to `2025-10-29.clover`
+
 The Stripe Webhooks Terraform Provider documentation can be found on the Terraform Provider documentation
 
 ## Example Usage
@@ -20,7 +22,7 @@ terraform {
   required_providers {
     stripe-webhooks = {
       source  = "louisbesse/stripe-webhooks"
-      version = "5.0.1"
+      version = "5.1.0"
     }
   }
 }
